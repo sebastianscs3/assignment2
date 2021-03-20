@@ -1,0 +1,93 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int seed =  15;
+
+int main() 
+{
+  
+  int d=3, N=5;
+  int data[N][d];
+  float average[d];
+  float matrix[d][d];
+  float var;
+  int i,j,sum;
+  
+  
+  srand(seed);
+  
+  for(i=0; i<5; i++)
+  {
+    
+    for(j=0; j<3; j++)
+    {
+      switch(j)
+      {
+        case 0: 
+        data[i][j] = rand()% 16 + 60;
+        break;
+        
+        case 1: 
+        data[i][j] = rand()% 151 + 550;
+        break;
+        
+        case 2: 
+        data[i][j] = rand()% 36 + 25;
+        break;
+      }
+    }
+  }
+  /////////////////////////////////////////////////
+  printf ("Data Used:\n\n");
+  printf ("ID       Height   Test Score Age\n");
+ for(i=0; i<5; i++)
+ {
+    printf("%d", i+1);
+
+   for(j=0; j<3; j++)
+   {
+     
+     printf("%10d", data[i][j]);
+   }
+   printf("\n");
+ }
+ printf("\n");
+ /////////////////////////////////////////////////////
+ 
+   for(i=0; i<3; i++)
+  {
+    sum =0;
+    
+    for(j=0; j<5; j++)
+    { 
+      sum += data[j][i];
+      average[i] = sum / 5.0;
+    }
+  }
+    printf("Average Height: %.2f\n", average[0]);
+    printf("Average Test Score: %.2f\n", average[1]);
+    printf("Average Age: %.2f\n", average[2]);
+    printf("\n");
+    ////////////////////////////////////////////////////
+       for(i=0; i<3; i++)
+  {
+
+    var =0;
+    for(j=0; j<5; j++)
+    { 
+      var = var + ((data[j][i]-average[i]) * (data[j][i]-average[i]))/4;
+      matrix[i][i] = var;
+      
+    }
+     
+  }
+     printf("Var (Height) = %.2f\n", matrix[0][0]);
+     printf("Var (Test Score) = %.2f\n", matrix[1][1]);
+     printf("Var (Age) = %.2f\n", matrix[2][2]);
+     printf("\n");
+
+  
+    
+    
+  return 0;
+}
